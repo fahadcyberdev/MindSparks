@@ -9,6 +9,10 @@ const AddBlog = () => {
   const [category , setCategory ] = useState('startup');
   const [isPublished , setIsPublished ] = useState(false);
 
+  const generateContent = async () => {
+
+  }
+
   const onSubmitHandler = async (e) =>{
     e.preventDefault();
     // handle form submission here
@@ -52,6 +56,12 @@ const AddBlog = () => {
             onChange={e => setSubTitle(e.target.value)}
             value={subTitle}
           />
+
+          <p className="mt-4"> Blog Discription </p>
+          <div className='max-w-lg h-74 p-16 sm:pb-10 pt-2 relative'>
+            <button type='button' className='absolute bottom-1 right-2 ml-2 text-xs text-white bg-black/70 px-3 py-1.5 rounded hover:underline cursor-pointer' onClick={generateContent}> Generate with AI</button>
+
+          </div>
         </div>
       </form>
     </>
