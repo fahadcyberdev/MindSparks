@@ -1,38 +1,61 @@
-import React from 'react'
-import Blog from '../../pages/Blog';
+import React from 'react';
 import { assets } from '../../assets/assets';
 
-const CommentTableItelm = ({ comment }) => {
-
-    const {blog, createdAt , _id} = comment;
-
-    const BlogDate = new Date(createdAt);
+const CommentTableItem = ({ comment }) => {
+  const { blog, createdAt, _id, name, content, isApproved } = comment;
+  const blogDate = new Date(createdAt).toLocaleString();
 
   return (
-    <tr className='border-y border-gray-300'>
-        <td className='px-6 py-4'>
-            <b className='font-medium text-gray-600'>Blog</b> : {blog?.title}
-            <br />
-            <br />
-            <b className='font-medium text-gray-600'> Name</b> : {comment.name}
-            <br />
-            <b className='font-medium text-gray-600'> Comment</b> : {comment.content}
-        </td>
+    <tr className="border-y border-gray-300 text-sm sm:text-base">
 
-        <td className='px-6 py-4 max-sm:hidden'>
-            {BlogDate.toLocaleString()}
-        </td>
+      {/* === Blog, Name & Comment Column === */}
+      <td className="px-4 py-3 sm:px-6 sm:py-4 w-full max-w-[350px]">
+        <div className="space-y-1">
+          <p><b className="text-gray-600">Blog</b>: {blog?.title}</p>
+          <p><b className="text-gray-600">Name</b>: {name}</p>
+          <p><b className="text-gray-600">Comment</b>: {content}</p>
 
-        <td className='px-6 py-4 '> 
-            <div className='inline-flex items-center gap-4 '>
-                {!comment.isApproved ? <img src={assets.tick_icon} alt="tick" className='w-5 hover:scale-110 transition-all cursor-pointer'  />  : <p className='text-xs border border-green-600 bg-green-100 text-green-600 rounded-full px-3 py-1 '>Approved</p> 
-                }
+          {/* Responsive Date Display for Small Screens */}
+          <p className="text-gray-400 mt-2 sm:hidden">
+            <b>Date</b>: {blogDate}
+          </p>
+        </div>
+      </td>
 
-                <img src={assets.bin_icon} alt="delete" className='w-5 hover:scale-110 transition-all cursor-pointer' />
-            </div>
-        </td>
+      {/* === Date Column (hidden on small screens) === */}
+      <td className="px-4 py-3 sm:px-6 sm:py-4 text-gray-400 hidden sm:table-cell">
+        {blogDate}
+      </td>
+
+      {/* === Action Column === */}
+      <td className="px-4 py-3 sm:px-6 sm:py-4">
+        <div className="flex flex-wrap items-center gap-3">
+
+          {/* Approval or Button */}
+          {!isApproved ? (
+            <img
+              src={assets.tick_icon}
+              alt="Approve"
+              title="Approve"
+              className="w-5 cursor-pointer hover:scale-110 transition-all"
+            />
+          ) : (
+            <p className="text-xs border border-green-600 bg-green-100 text-green-700 rounded-full px-3 py-1">
+              Approved
+            </p>
+          )}
+
+          {/* Delete Icon */}
+          <img
+            src={assets.bin_icon}
+            alt="Delete"
+            title="Delete"
+            className="w-5 cursor-pointer hover:scale-110 transition-all"
+          />
+        </div>
+      </td>
     </tr>
-  )
-}
+  );
+};
 
-export default CommentTableItelm
+export default CommentTableItem;
