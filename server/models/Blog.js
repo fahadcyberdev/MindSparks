@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
 
-
 const blogSchema = new mongoose.Schema({
-    title: {type: string , required: true},
-    subTitle : {type: String}, 
-    title: {type: String, required: true  },
-    discription : {type: string , required: true},
-    category: {type: String , required : true},
-    image: {type: Boolean , required : true},
-    isPublished : {type: String , required : true},
+    title: { type: String, required: true },
+    subTitle: { type: String },
+    description: { type: String, required: true },
+    category: { type: String, required: true },
+    image: { type: String, required: true },       // image URL
+    isPublished: { type: Boolean, required: true },
+}, { timestamps: true });
 
-},{timestamps:true})
+const Blog = mongoose.model('blog', blogSchema);
+
+export default Blog;
